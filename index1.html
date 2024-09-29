@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Battle Simulator</title>
+    <link rel="stylesheet" href="style1.css">
+    <script src="path/to/your/javascript.js"></script>
+    <style>
+        .selected {
+            border: 3px solid #A3B18A; /* Highlight color for selected cards */
+        }
+        #battle-button {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #A3B18A;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .winner {
+            border: 5px solid gold; /* Highlight winner */
+            animation: flash-border 1s infinite;
+        }
+        @keyframes flash-border {
+            0% { border-color: gold; }
+            50% { border-color: transparent; }
+            100% { border-color: gold; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Pokémon Battle Simulator</h1>
+    </header>
+    <main>
+        <section id="pokemon-cards">
+            <!-- Pokémon cards here (same as before) -->
+            <div class="pokemon-card" onclick="showDetails('gengar')" id="gengar">
+                <h2>Gengar</h2>
+                <img src="https://img.pokemondb.net/sprites/home/normal/gengar.png" alt="Gengar">
+                <button onclick="playCry('gengarCry')">Play Cry</button>
+            </div>
+            <div class="pokemon-card" onclick="showDetails('alakazam')" id="alakazam">
+                <h2>Alakazam</h2>
+                <img src="https://img.pokemondb.net/sprites/home/normal/alakazam.png" alt="Alakazam">
+                <button onclick="playCry('alakazamCry')">Play Cry</button>
+            </div>
+            <div class="pokemon-card" onclick="showDetails('pikachu')" id="pikachu">
+                <h2>Pikachu</h2>
+                <img src="https://img.pokemondb.net/sprites/home/normal/pikachu.png" alt="Pikachu">
+                <button onclick="playCry('pikachuCry')">Play Cry</button>
+            </div>
+            <div class="pokemon-card" onclick="showDetails('charmander')" id="charmander">
+                <h2>Charmander</h2>
+                <img src="https://img.pokemondb.net/sprites/home/normal/charmander.png" alt="Charmander">
+                <button onclick="playCry('charmanderCry')">Play Cry</button>
+            </div>
+            <div class="pokemon-card" onclick="showDetails('bulbasaur')" id="bulbasaur">
+                <h2>Bulbasaur</h2>
+                <img src="https://img.pokemondb.net/sprites/home/normal/bulbasaur.png" alt="Bulbasaur">
+                <button onclick="playCry('bulbasaurCry')">Play Cry</button>
+            </div>
+            <div class="pokemon-card" onclick="showDetails('squirtle')" id="squirtle">
+                <h2>Squirtle</h2>
+                <img src="https://img.pokemondb.net/sprites/home/normal/squirtle.png" alt="Squirtle">
+                <button onclick="playCry('squirtleCry')">Play Cry</button>
+            </div>
+            <div class="pokemon-card" onclick="showDetails('jigglypuff')" id="jigglypuff">
+                <h2>Jigglypuff</h2>
+                <img src="https://img.pokemondb.net/sprites/home/normal/jigglypuff.png" alt="Jigglypuff">
+                <button onclick="playCry('jigglypuffCry')">Play Cry</button>
+            </div>
+            <div class="pokemon-card" onclick="showDetails('eevee')" id="eevee">
+                <h2>Eevee</h2>
+                <img src="https://img.pokemondb.net/sprites/home/normal/eevee.png" alt="Eevee">
+                <button onclick="playCry('eeveeCry')">Play Cry</button>
+            </div>
+            <div class="pokemon-card" onclick="showDetails('snorlax')" id="snorlax">
+                <h2>Snorlax</h2>
+                <img src="https://img.pokemondb.net/sprites/home/normal/snorlax.png" alt="Snorlax">
+                <button onclick="playCry('snorlaxCry')">Play Cry</button>
+            </div>
+            <div class="pokemon-card" onclick="showDetails('mewtwo')" id="mewtwo">
+                <h2>Mewtwo</h2>
+                <img src="https://img.pokemondb.net/sprites/home/normal/mewtwo.png" alt="Mewtwo">
+                <button onclick="playCry('mewtwoCry')">Play Cry</button>
+            </div>
+            <div class="pokemon-card" onclick="showDetails('gardevoir')" id="gardevoir">
+                <h2>Gardevoir</h2>
+                <img src="https://img.pokemondb.net/sprites/home/normal/gardevoir.png" alt="Gardevoir">
+                <button onclick="playCry('gardevoirCry')">Play Cry</button>
+            </div>
+            <div class="pokemon-card" onclick="showDetails('lucario')" id="lucario">
+                <h2>Lucario</h2>
+                <img src="https://img.pokemondb.net/sprites/home/normal/lucario.png" alt="Lucario">
+                <button onclick="playCry('lucarioCry')">Play Cry</button>
+            </div>
+            <div class="pokemon-card" onclick="showDetails('greninja')" id="greninja">
+                <h2>Greninja</h2>
+                <img src="https://img.pokemondb.net/sprites/home/normal/greninja.png" alt="Greninja">
+                <button onclick="playCry('greninjaCry')">Play Cry</button>
+            </div>
+            <div class="pokemon-card" onclick="showDetails('sylveon')" id="sylveon">
+                <h2>Sylveon</h2>
+                <img src="https://img.pokemondb.net/sprites/home/normal/sylveon.png" alt="Sylveon">
+                <button onclick="playCry('sylveonCry')">Play Cry</button>
+            </div>
+            <div class="pokemon-card" onclick="showDetails('charizard')" id="charizard">
+                <h2>Charizard</h2>
+                <img src="https://img.pokemondb.net/sprites/home/normal/charizard.png" alt="Charizard">
+                <button onclick="playCry('charizardCry')">Play Cry</button>
+            </div>
+        </section>
+        
+        <section id="select-pokemon">
+            <h2>Select Your Pokémon</h2>
+            <button id="battle-button" onclick="initiateBattle()">Start Battle</button>
+        </section>
+
+        <div id="battle-summary"></div>
+    </main>
+
+    <div id="details-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title"></h2>
+            <p><strong>Height:</strong> <span id="modal-height"></span></p>
+            <p><strong>Weight:</strong> <span id="modal-weight"></span></p>
+            <p><strong>Base Stats:</strong> HP: <span id="modal-hp"></span>, Attack: <span id="modal-attack"></span>, Defense: <span id="modal-defense"></span>, Speed: <span id="modal-speed"></span></p>
+            <p><strong>Abilities:</strong> <span id="modal-abilities"></span></p>
+            <p><strong>Moves:</strong> <span id="modal-moves"></span></p>
+            <p><strong>Color:</strong> <span id="modal-color"></span></p>
+            <p><strong>Shape:</strong> <span id="modal-shape"></span></p>
+            <p><strong>Location:</strong> <span id="modal-location"></span></p>
+            <p><strong>Egg Groups:</strong> <span id="modal-egg-groups"></span></p>
+        </div>
+    </div>
+
+    <script>
+        let selectedPokemons = [];
+        const details = {
+        gengar: {
+            height: "1.5 m",
+            weight: "40 kg",
+            stats: { hp: 60, attack: 65, defense: 60, speed: 110 },
+            abilities: "Cursed Body",
+            moves: "Shadow Ball, Dream Eater, Lick",
+            color: "Purple",
+            shape: "Human-Like",
+            location: "Pokemon Tower, Lavender Town",
+            eggGroups: "Amorphous",
+        },
+        alakazam: {
+            height: "1.5 m",
+            weight: "48 kg",
+            stats: { hp: 55, attack: 50, defense: 45, speed: 120 },
+            abilities: "Synchronize",
+            moves: "Psybeam, Future Sight, Psychic",
+            color: "Yellow",
+            shape: "Humanoid",
+            location: "Route 8, Celadon City",
+            eggGroups: "Human-Like",
+        },
+        pikachu: {
+            height: "0.4 m",
+            weight: "6.0 kg",
+            stats: { hp: 35, attack: 55, defense: 40, speed: 90 },
+            abilities: "Static",
+            moves: "Thunderbolt, Quick Attack, Iron Tail",
+            color: "Yellow",
+            shape: "Quadruped",
+            location: "Viridian Forest, Power Plant",
+            eggGroups: "Field, Fairy",
+        },
+        charmander: {
+            height: "0.6 m",
+            weight: "8.5 kg",
+            stats: { hp: 39, attack: 52, defense: 43, speed: 65 },
+            abilities: "Blaze",
+            moves: "Flamethrower, Dragon Claw, Fire Spin",
+            color: "Orange",
+            shape: "Lizard",
+            location: "Route 24, Kanto",
+            eggGroups: "Monster, Dragon",
+        },
+        bulbasaur: {
+            height: "0.7 m",
+            weight: "6.9 kg",
+            stats: { hp: 45, attack: 49, defense: 49, speed: 45 },
+            abilities: "Overgrow",
+            moves: "Vine Whip, Razor Leaf, Solar Beam",
+            color: "Green",
+            shape: "Quadruped",
+            location: "Route 1, Kanto",
+            eggGroups: "Monster, Grass",
+        },
+        squirtle: {
+            height: "0.6 m",
+            weight: "9.0 kg",
+            stats: { hp: 44, attack: 48, defense: 65, speed: 43 },
+            abilities: "Torrent",
+            moves: "Water Gun, Bubble, Hydro Pump",
+            color: "Blue",
+            shape: "Quadruped",
+            location: "Route 24, Kanto",
+            eggGroups: "Monster, Water 1",
+        },
+        jigglypuff: {
+            height: "0.5 m",
+            weight: "5.5 kg",
+            stats: { hp: 115, attack: 45, defense: 50, speed: 20 },
+            abilities: "Cute Charm",
+            moves: "Sing, Pound, Double-Edge",
+            color: "Pink",
+            shape: "Squiggle",
+            location: "Route 3, Kanto",
+            eggGroups: "Fairy, Human-Like",
+        },
+        eevee: {
+            height: "0.3 m",
+            weight: "6.5 kg",
+            stats: { hp: 55, attack: 55, defense: 50, speed: 55 },
+            abilities: "Run Away",
+            moves: "Quick Attack, Sand Attack, Bite",
+            color: "Brown",
+            shape: "Quadruped",
+            location: "Ecruteak City, Johto",
+            eggGroups: "Field, Human-Like",
+        },
+        eevee: {
+            height: "0.3 m",
+            weight: "6.5 kg",
+            stats: { hp: 55, attack: 55, defense: 50, speed: 55 },
+            abilities: "Run Away",
+            moves: "Quick Attack, Sand Attack, Bite",
+            color: "Brown",
+            shape: "Quadruped",
+            location: "Ecruteak City, Johto",
+            eggGroups: "Field, Human-Like",
+        },
+        snorlax: {
+            height: "2.1 m",
+            weight: "460 kg",
+            stats: { hp: 160, attack: 110, defense: 65, speed: 30 },
+            abilities: "Immunity",
+            moves: "Body Slam, Rest, Sleep Talk",
+            color: "Blue",
+            shape: "Humanoid",
+            location: "Route 12, Kanto",
+            eggGroups: "Monster, Rare",
+        },
+        mewtwo: {
+            height: "2.0 m",
+            weight: "122 kg",
+            stats: { hp: 106, attack: 110, defense: 90, speed: 130 },
+            abilities: "Pressure",
+            moves: "Psychic, Psystrike, Aura Sphere",
+            color: "Purple",
+            shape: "Humanoid",
+            location: "Cerulean Cave, Kanto",
+            eggGroups: "Undiscovered",
+        },
+        lucario: {
+            height: "1.2 m",
+            weight: "54 kg",
+            stats: { hp: 70, attack: 110, defense: 70, speed: 90 },
+            abilities: "Steadfast",
+            moves: "Aura Sphere, Close Combat, Extreme Speed",
+            color: "Blue",
+            shape: "Humanoid",
+            location: "Cave of Being, Sinnoh",
+            eggGroups: "Human-Like, Field",
+        },
+        greninja: {
+            height: "1.5 m",
+            weight: "40 kg",
+            stats: { hp: 72, attack: 95, defense: 67, speed: 122 },
+            abilities: "Torrent",
+            moves: "Water Shuriken, Hydro Pump, Ice Beam",
+            color: "Blue",
+            shape: "Quadruped",
+            location: "Kalos Route 2, Kalos",
+            eggGroups: "Field, Water 1",
+        },
+        sylveon: {
+            height: "1.0 m",
+            weight: "23.5 kg",
+            stats: { hp: 95, attack: 65, defense: 65, speed: 60 },
+            abilities: "Cute Charm",
+            moves: "Moonblast, Hyper Voice, Wish",
+            color: "Pink",
+            shape: "Quadruped",
+            location: "Kalos Route 10, Kalos",
+            eggGroups: "Fairy, Field",
+        },
+        charizard: {
+            height: "1.7 m",
+            weight: "90.5 kg",
+            stats: { hp: 78, attack: 84, defense: 78, speed: 100 },
+            abilities: "Blaze",
+            moves: "Flamethrower, Dragon Claw, Air Slash",
+            color: "Orange",
+            shape: "Quadruped",
+            location: "Victory Road, Kanto",
+            eggGroups: "Monster, Dragon",
+        },
+        pikachu: {
+            height: "0.4 m",
+            weight: "6 kg",
+            stats: { hp: 35, attack: 55, defense: 40, speed: 90 },
+            abilities: "Static",
+            moves: "Thunderbolt, Quick Attack, Iron Tail",
+            color: "Yellow",
+            shape: "Quadruped",
+            location: "Viridian Forest, Kanto",
+            eggGroups: "Field, Fairy",
+        },
+                                                  
+    };
+
+        function selectPokemon(pokemon) {
+            // Toggle selection
+            const card = document.getElementById(pokemon);
+            if (selectedPokemons.includes(pokemon)) {
+                selectedPokemons = selectedPokemons.filter(p => p !== pokemon);
+                card.classList.remove('selected');
+            } else {
+                if (selectedPokemons.length < 2) {
+                    selectedPokemons.push(pokemon);
+                    card.classList.add('selected');
+                } else {
+                    alert("You can only select two Pokémon.");
+                }
+            }
+        }
+
+        function initiateBattle() {
+            if (selectedPokemons.length !== 2) {
+                alert("Please select two Pokémon to battle!");
+                return;
+            }
+            const pokemon1 = selectedPokemons[0];
+            const pokemon2 = selectedPokemons[1];
+            console.log(selectedPokemons);
+            console.log(pokemon1,pokemon2);
+        // [pokemon1, pokemon2] = selectedPokemons;
+            const damage1 = calculateDamage(pokemon1, pokemon2);
+            const damage2 = calculateDamage(pokemon2, pokemon1);
+            console.log(damage1,damage2);
+
+            const winner = damage1 > damage2 ? pokemon1 : damage2 > damage1 ? pokemon2 : "It's a tie!";
+            displayBattleSummary(winner, pokemon1, damage1, pokemon2, damage2);
+        }
+
+        function calculateDamage(attacker, defender) {
+
+            const attackingPokemon = details[attacker];
+            const defendingPokemon = details[defender];
+            //const attackingPokemon = getPokemonData(attacker);
+            //const defendingPokemon = getPokemonData(defender);
+            //const attackingPokemon = attacker;
+            //const defendingPokemon = defender;
+
+            // Randomly select a move
+            console.log('Length ', attackingPokemon.moves.length);
+            const attackingMoveIndex = Math.floor(Math.random() * attackingPokemon.moves.length);
+            const attackingMove = attackingPokemon.moves[attackingMoveIndex];
+            console.log(attackingMoveIndex, attackingMove);
+            // Base damage from the move
+            const baseDamage = attackingMove.power;
+
+            // Type effectiveness (replace with actual logic)
+            let effectiveness = 1; // Default to neutral effectiveness
+            // Implement logic to fetch type effectiveness based on move type and defending Pokemon's type
+            // You can use the Pokemon API or pre-defined data structures
+
+            console.log(attackingPokemon.stats.attack, defendingPokemon.stats.defense, baseDamage);
+            // Damage calculation
+            const attackStat = attackingPokemon.stats.attack;
+            const defenseStat = defendingPokemon.stats.defense;
+            //const damage = Math.floor(0.5 * baseDamage * (attackStat / defenseStat) * effectiveness);
+
+            damage = Math.floor(Math.random() * attackingPokemon.moves.length);
+            console.log(damage);
+            return damage;
+            
+}
+
+        function displayBattleSummary(winner, pokemon1, damage1, pokemon2, damage2) {
+            const battleSummaryDiv = document.getElementById('battle-summary');
+            battleSummaryDiv.innerHTML = `
+                <h2>Battle Summary</h2>
+                <p><strong>${winner} wins!</strong></p>
+                <p>${pokemon1} used a move and caused <strong>${damage1}</strong> damage.</p>
+                <p>${pokemon2} used a move and caused <strong>${damage2}</strong> damage.</p>
+            `;
+            highlightWinner(winner);
+        }
+
+        function highlightWinner(winner) {
+            const winnerCard = document.getElementById(winner);
+            if (winnerCard) {
+                winnerCard.classList.add('winner');
+                setTimeout(() => {
+                    winnerCard.classList.remove('winner');
+                }, 3000); // Flashing effect duration
+            }
+        }
+
+        function playCry(pokemonCry) {
+            const audio = new Audio(`sounds/${pokemonCry}.mp3`);
+            audio.play();
+        }
+
+        function showDetails(pokemon) {
+            // Fetch details from your data structure and display in modal
+            const modalTitle = document.getElementById('modal-title');
+            const modalHeight = document.getElementById('modal-height');
+            const modalWeight = document.getElementById('modal-weight');
+            const modalHp = document.getElementById('modal-hp');
+            const modalAttack = document.getElementById('modal-attack');
+            const modalDefense = document.getElementById('modal-defense');
+            const modalSpeed = document.getElementById('modal-speed');
+            const modalAbilities = document.getElementById('modal-abilities');
+            const modalMoves = document.getElementById('modal-moves');
+            const modalColor = document.getElementById('modal-color');
+            const modalShape = document.getElementById('modal-shape');
+            const modalLocation = document.getElementById('modal-location');
+            const modalEggGroups = document.getElementById('modal-egg-groups');
+
+            // Assuming you have a data structure containing Pokémon details
+            const pokemonData = getPokemonData(pokemon);
+            modalTitle.innerText = pokemonData.name;
+            modalHeight.innerText = pokemonData.height;
+            modalWeight.innerText = pokemonData.weight;
+            modalHp.innerText = pokemonData.baseStats.hp;
+            modalAttack.innerText = pokemonData.baseStats.attack;
+            modalDefense.innerText = pokemonData.baseStats.defense;
+            modalSpeed.innerText = pokemonData.baseStats.speed;
+            modalAbilities.innerText = pokemonData.abilities.join(", ");
+            modalMoves.innerText = pokemonData.moves.join(", ");
+            modalColor.innerText = pokemonData.color;
+            modalShape.innerText = pokemonData.shape;
+            modalLocation.innerText = pokemonData.location;
+            modalEggGroups.innerText = pokemonData.eggGroups.join(", ");
+
+            // Open modal
+            document.getElementById('details-modal').style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById('details-modal').style.display = "none";
+        }
+        
+        // Ensure Pokémon cards can be selected
+        document.querySelectorAll('.pokemon-card').forEach(card => {
+            card.onclick = () => selectPokemon(card.id);
+        });
+    </script>
+</body>
+</html>
+
